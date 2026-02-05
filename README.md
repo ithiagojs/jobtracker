@@ -4,8 +4,6 @@
 
 Uma ferramenta moderna e completa para otimizar sua busca por vagas, gerenciar aplicações e acompanhar seu progresso profissional.
 
-[![Deploy com Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/seu-usuario/jobtracker)
-
 ---
 
 ## ✨ Funcionalidades
@@ -58,7 +56,7 @@ Uma ferramenta moderna e completa para otimizar sua busca por vagas, gerenciar a
   - 💬 Entrevista
   - 🎉 Oferta
   - ❌ Rejeitadas
-- **Drag & Drop funcional** com @dnd-kit
+- **Drag & Drop funcional** 
 - Adicionar vagas manualmente (cargo + empresa)
 - Editar notas em cada vaga
 - Deletar vagas
@@ -89,100 +87,6 @@ Uma ferramenta moderna e completa para otimizar sua busca por vagas, gerenciar a
 - **TypeScript** - Type safety e melhor DX
 - **Vite** - Build tool ultra-rápido
 - **TailwindCSS** - Utility-first CSS framework
-
-### Componentes & UI
-- **@dnd-kit** - Drag and Drop acessível e performático
-- **Recharts** - Biblioteca de gráficos responsivos
-- **Sonner** - Toast notifications elegantes
-- **lucide-react** - Ícones SVG consistentes e leves
-- **class-variance-authority** - Variantes de componentes tipadas
-- **tailwind-merge** - Merge condicional de classes Tailwind
-
-### Ferramentas
-- **uuid** - Geração de IDs únicos
-- **clsx** - Utilitário para classes condicionais
-- **Custom Hooks** - `useLocalStorage` para persistência
-
----
-
-## 🚀 Como Usar Localmente
-
-### Pré-requisitos
-- **Node.js** 18+ 
-- **npm** ou **pnpm**
-
-### Instalação
-
-```bash
-# Clone o repositório
-git clone https://github.com/seu-usuario/jobtracker.git
-cd jobtracker
-
-# Instale as dependências
-npm install
-
-# Inicie o servidor de desenvolvimento
-npm run dev
-```
-
-Acesse: **http://localhost:5173**
-
-### Build para Produção
-
-```bash
-# Cria build otimizada
-npm run build
-
-# Preview da build
-npm run preview
-```
-
----
-
-## 📦 Deploy no Vercel
-
-### Método 1: Via Dashboard
-
-1. Acesse [vercel.com](https://vercel.com)
-2. Clique em **"Add New Project"**
-3. Importe seu repositório do GitHub
-4. Configure o projeto:
-   - **Framework Preset**: Vite
-   - **Build Command**: `npm run build`
-   - **Output Directory**: `dist`
-5. Clique em **Deploy** ✨
-
-### Método 2: Via CLI
-
-```bash
-# Instale o Vercel CLI
-npm i -g vercel
-
-# Faça login
-vercel login
-
-# Deploy
-vercel
-
-# Deploy para produção
-vercel --prod
-```
-
-### Configuração Opcional (vercel.json)
-
-Crie um arquivo `vercel.json` na raiz:
-
-```json
-{
-  "$schema": "https://openapi.vercel.sh/vercel.json",
-  "buildCommand": "npm run build",
-  "devCommand": "npm run dev",
-  "framework": "vite",
-  "outputDirectory": "dist"
-}
-```
-
----
 
 ## 📂 Estrutura do Projeto
 
@@ -248,10 +152,6 @@ Este projeto foi criado com ❤️ para a turma de Dados.
 
 ---
 
-## 🙏 Agradecimentos
+## 🙏 Agradecimentos Meu Vilão Preferido
 
-- Stack: React, TypeScript, Vite, TailwindCSS
-- UI/UX: Inspirado em designs modernos com glassmorphism
-- Icons: [Lucide](https://lucide.dev)
-- Charts: [Recharts](https://recharts.org)
 
