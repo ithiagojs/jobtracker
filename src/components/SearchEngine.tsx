@@ -161,7 +161,11 @@ export function SearchEngine({ blocklist, onSearch, initialValues }: SearchEngin
                         className="w-full bg-muted/50 border border-border rounded-lg px-4 py-3 text-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all cursor-pointer"
                     >
                         {DATE_FILTER_OPTIONS.map(option => (
-                            <option key={option.value} value={option.value}>
+                            <option
+                                key={option.value}
+                                value={option.value}
+                                className="bg-background text-foreground"
+                            >
                                 {option.label}
                             </option>
                         ))}
