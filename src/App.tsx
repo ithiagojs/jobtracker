@@ -8,8 +8,8 @@ import { AnalyticsDashboard } from './components/AnalyticsDashboard';
 import { KanbanBoard } from './components/KanbanBoard';
 import { Toaster, toast } from 'sonner';
 import { useLocalStorage } from './hooks/useLocalStorage';
-import type { SearchHistory, SearchPreset, DateFilter, JobApplication, ApplicationStatus } from './types/job';
-import { v4 as uuidv4 } from 'uuid';
+import { useSearchManager } from './hooks/useSearchManager';
+import { useJobBoard } from './hooks/useJobBoard';
 import { Layout, Search as SearchIcon } from 'lucide-react';
 
 type ViewMode = 'search' | 'board';
@@ -17,19 +17,11 @@ type ViewMode = 'search' | 'board';
 function App() {
   const [theme, setTheme] = useLocalStorage<'dark' | 'light'>('theme', 'dark');
   const [blocklist, setBlocklist] = useLocalStorage<string[]>('blocklist', []);
-  const [history, setHistory] = useLocalStorage<SearchHistory[]>('search_history', []);
-  const [presets, setPresets] = useLocalStorage<SearchPreset[]>('search_presets', []);
-  const [applications, setApplications] = useLocalStorage<JobApplication[]>('job_applications', []);
-
   const [viewMode, setViewMode] = useState<ViewMode>('search');
 
-  // Current search state
-  const [currentSearch, setCurrentSearch] = useState<{
-    cargo: string;
-    sites: string[];
-    dateFilter: DateFilter;
-    location: string;
-  } | null>(null);
+  // Logic extracted to custom hooks for Clean Code
+  const searchManager = useSearchManager();
+  const jobBoard = useJobBoard();
 
   useEffect(() => {
     document.documentElement.classList.remove('light', 'dark');
@@ -38,94 +30,6 @@ function App() {
 
   const toggleTheme = () => {
     setTheme(prev => prev === 'dark' ? 'light' : 'dark');
-  };
-
-  const handleSearch = (cargo: string, sites: string[], dateFilter: DateFilter, location: string) => {
-    const newHistoryItem: SearchHistory = {
-      id: uuidv4(),
-      cargo,
-      sites,
-      dateFilter,
-      location,
-      timestamp: new Date().toISOString(),
-      query: ''
-    };
-    setHistory(prev => [newHistoryItem, ...prev].slice(0, 50));
-    setCurrentSearch({ cargo, sites, dateFilter, location });
-  };
-
-  const handleSavePreset = (name: string) => {
-    if (!currentSearch) return;
-    const newPreset: SearchPreset = {
-      id: uuidv4(),
-      name,
-      ...currentSearch,
-      createdAt: new Date().toISOString()
-    };
-    setPresets(prev => [...prev, newPreset]);
-    toast.success('Preset salvo com sucesso!');
-  };
-
-  const handleApplyHistory = (item: SearchHistory) => {
-    setCurrentSearch({
-      cargo: item.cargo,
-      sites: item.sites,
-      dateFilter: item.dateFilter,
-      location: item.location
-    });
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-    toast.info('Busca carregada do histórico');
-  };
-
-  const handleApplyPreset = (preset: SearchPreset) => {
-    setCurrentSearch({
-      cargo: preset.cargo,
-      sites: preset.sites,
-      dateFilter: preset.dateFilter,
-      location: preset.location
-    });
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-    toast.info(`Preset "${preset.name}" carregado`);
-  };
-
-  // Kanban Handlers
-  const handleAddJob = (status: ApplicationStatus) => {
-    const role = window.prompt("Cargo da vaga:");
-    if (!role) return;
-    const company = window.prompt("Empresa:");
-    if (!company) return;
-
-    const newJob: JobApplication = {
-      id: uuidv4(),
-      role,
-      company,
-      status,
-      dateAdded: new Date().toISOString(),
-      dateUpdated: new Date().toISOString()
-    };
-    setApplications(prev => [...prev, newJob]);
-    toast.success("Vaga adicionada ao quadro!");
-  };
-
-  const handleUpdateJobs = (updatedJobs: JobApplication[]) => {
-    setApplications(updatedJobs);
-  };
-
-  const handleDeleteJob = (id: string) => {
-    if (window.confirm("Remover esta vaga do quadro?")) {
-      setApplications(prev => prev.filter(job => job.id !== id));
-      toast.success("Vaga removida");
-    }
-  };
-
-  const handleEditJob = (job: JobApplication) => {
-    // Simple prompt implementation for MVP
-    const notes = window.prompt("Notas para a vaga:", job.notes || "");
-    if (notes !== null) {
-      const updated = applications.map(j => j.id === job.id ? { ...j, notes, dateUpdated: new Date().toISOString() } : j);
-      setApplications(updated);
-      toast.success("Notas atualizadas");
-    }
   };
 
   return (
@@ -150,7 +54,7 @@ function App() {
             >
               <Layout className="w-4 h-4" />
               Minhas Vagas
-              <span className="bg-primary/10 text-primary text-[10px] px-1.5 py-0.5 rounded-full">{applications.length}</span>
+              <span className="bg-primary/10 text-primary text-[10px] px-1.5 py-0.5 rounded-full">{jobBoard.applications.length}</span>
             </button>
           </div>
         </div>
@@ -163,16 +67,16 @@ function App() {
             <div className="space-y-8">
               <SearchEngine
                 blocklist={blocklist}
-                onSearch={handleSearch}
-                initialValues={currentSearch || undefined}
+                onSearch={searchManager.performSearch}
+                initialValues={searchManager.currentSearch || undefined}
               />
 
-              <AnalyticsDashboard history={history} />
+              <AnalyticsDashboard history={searchManager.history} />
 
               <SearchHistoryList
-                history={history}
-                onSelect={handleApplyHistory}
-                onClear={() => setHistory([])}
+                history={searchManager.history}
+                onSelect={searchManager.applyHistory}
+                onClear={searchManager.clearHistory}
               />
             </div>
 
@@ -194,22 +98,22 @@ function App() {
               />
 
               <SearchPresets
-                presets={presets}
-                onSelect={handleApplyPreset}
-                onSave={handleSavePreset}
-                onDelete={(id) => setPresets(prev => prev.filter(p => p.id !== id))}
-                canSaveCurrent={!!currentSearch}
+                presets={searchManager.presets}
+                onSelect={searchManager.applyPreset}
+                onSave={searchManager.savePreset}
+                onDelete={searchManager.deletePreset}
+                canSaveCurrent={!!searchManager.currentSearch}
               />
             </div>
           </div>
         ) : (
           <div className="max-w-7xl mx-auto h-full">
             <KanbanBoard
-              jobs={applications}
-              onUpdateJobs={handleUpdateJobs}
-              onAddJob={handleAddJob}
-              onDeleteJob={handleDeleteJob}
-              onEditJob={handleEditJob}
+              jobs={jobBoard.applications}
+              onUpdateJobs={jobBoard.updateJobs}
+              onAddJob={jobBoard.addJob}
+              onDeleteJob={jobBoard.deleteJob}
+              onEditJob={jobBoard.editJob}
             />
           </div>
         )}
