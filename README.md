@@ -1,157 +1,69 @@
-# 💼 JobTracker
+# 💼 JobTracker: Sua Busca por Emprego Baseada em Dados
 
-> **Busca inteligente de vagas de emprego em tecnologia** 🚀
-
-Uma ferramenta moderna e completa para otimizar sua busca por vagas, gerenciar aplicações e acompanhar seu progresso profissional.
-
----
-
-## ✨ Funcionalidades
-
-### 🔍 Motor de Busca Inteligente
-- **Google Dorks automáticos** - Gera queries otimizadas com operadores avançados
-- **30+ sites de vagas** pré-configurados:
-  - **ATS Globais**: Greenhouse, Lever, Workable, SmartRecruiters, BambooHR
-  - **Brasil**: Gupy, Vagas.com, Catho, InfoJobs, Trampos
-  - **Startups & Remoto**: AngelList, RemoteOK, WeWorkRemotely, FlexJobs
-  - **Big Tech**: LinkedIn, Indeed, Glassdoor
-  - E muitos outros!
-- **Filtros avançados**:
-  - Cargo/Posição
-  - Localização (opcional)
-  - Data (últimas 24h, semana, mês, ano)
-  - Seleção múltipla de sites com agrupamento por categoria
-- **Integração automática com blocklist** - Exclui empresas indesejadas das buscas
-
-### 🚫 Blocklist Manager
-- Adicione empresas que você **não quer ver** nas buscas
-- Importar/Exportar listas via JSON
-- Visual limpo com badges removíveis
-- Exclusão automática nas queries do Google
-
-### 📊 Analytics Dashboard
-- **Gráfico visual** dos 5 cargos mais buscados (Recharts)
-- **Estatísticas em tempo real**:
-  - Total de buscas realizadas
-  - Número de sites explorados
-  - Cargo mais procurado em destaque
-- Aparece automaticamente após 3+ buscas
-
-### 📜 Histórico de Buscas
-- **50 últimas buscas** salvas automaticamente
-- Reaplicar qualquer busca com 1 clique
-- Timestamps formatados
-- Botão para limpar histórico
-
-### ⭐ Presets de Busca
-- Salve suas **configurações favoritas**
-- Nomeie cada preset (ex: "Frontend Remote", "Data Analyst SP")
-- Aplicar instantaneamente
-- Gerenciar e deletar presets
-
-### 📋 Kanban Board - Minhas Vagas
-- **5 colunas de status**:
-  - 💾 Salvas
-  - ✉️ Aplicadas
-  - 💬 Entrevista
-  - 🎉 Oferta
-  - ❌ Rejeitadas
-- **Drag & Drop funcional** 
-- Adicionar vagas manualmente (cargo + empresa)
-- Editar notas em cada vaga
-- Deletar vagas
-- **Badge dinâmico** mostrando total de aplicações
-- Ordenação automática por data de atualização
-
-### 🎨 Tema Dark/Light
-- **Alternância suave** entre temas claro e escuro
-- Preferência salva no LocalStorage
-- Design glassmorphism e gradientes premium
-- Todos os componentes otimizados para ambos os temas
-
-### 💾 Persistência Total
-- **LocalStorage** para todos os dados:
-  - Tema selecionado
-  - Blocklist
-  - Histórico de buscas
-  - Presets salvos
-  - Aplicações no Kanban
-- **Sobrevive a refresh** - Seus dados nunca são perdidos
+<div align="center">
+  <img src="https://img.shields.io/github/stars/ithiagojs/jobtracker?style=for-the-badge&logo=github&color=F7DF1E&logoColor=black" alt="GitHub Repo stars">
+  <img src="https://img.shields.io/github/forks/ithiagojs/jobtracker?style=for-the-badge&logo=github&color=F7DF1E&logoColor=black" alt="GitHub forks">
+</div>
 
 ---
 
-## 🛠️ Tecnologias
+### 🚀 O Projeto
 
-### Frontend
-- **React 19** - Biblioteca UI moderna
-- **TypeScript** - Type safety e melhor DX
-- **Vite** - Build tool ultra-rápido
-- **TailwindCSS** - Utility-first CSS framework
+O **JobTracker** é uma ferramenta moderna e completa desenvolvida para otimizar a jornada de quem busca recolocação no mercado de tecnologia. Ele transforma a busca manual em um processo estratégico, permitindo gerenciar aplicações e acompanhar o progresso profissional em um único lugar.
 
-## 📂 Estrutura do Projeto
-
-```
-jobtracker/
-├── src/
-│   ├── components/          # Componentes React
-│   │   ├── AnalyticsDashboard.tsx
-│   │   ├── BlocklistManager.tsx
-│   │   ├── Header.tsx
-│   │   ├── JobCard.tsx
-│   │   ├── KanbanBoard.tsx
-│   │   ├── KanbanColumn.tsx
-│   │   ├── SearchEngine.tsx
-│   │   ├── SearchHistoryList.tsx
-│   │   └── SearchPresets.tsx
-│   ├── hooks/               # Custom hooks
-│   │   └── useLocalStorage.ts
-│   ├── lib/                 # Utilitários
-│   │   └── utils.ts
-│   ├── types/               # TypeScript types
-│   │   └── job.ts
-│   ├── App.tsx              # Componente principal
-│   ├── App.css              # Estilos do App
-│   ├── index.css            # Estilos globais + Tailwind
-│   └── main.tsx             # Entry point
-├── public/                  # Assets estáticos
-├── index.html               # HTML base
-├── package.json
-├── tailwind.config.js       # Configuração do Tailwind
-├── tsconfig.json            # Configuração do TypeScript
-└── vite.config.ts           # Configuração do Vite
-```
+> **💡 Diferencial:** Utiliza técnicas de Google Dorks para encontrar vagas que muitas vezes não aparecem nas buscas convencionais.
 
 ---
 
-## 🎯 Próximas Melhorias Planejadas
+### ✨ Funcionalidades
 
-- [ ] Exportar/Importar dados completos (backup JSON)
-- [ ] Busca direta por site individual
-- [ ] Modal completo para adicionar vagas (com URL, salário, deadline)
-- [ ] Filtros e busca no Kanban
-- [ ] Gráfico de timeline de buscas
-- [ ] Heatmap de sites mais usados
-- [ ] Notificações de follow-up
-- [ ] PWA (Progressive Web App)
-- [ ] Integração com LinkedIn API
+#### 🔍 Motor de Busca Inteligente
+* **Google Dorks Automáticos:** Gera queries otimizadas com operadores avançados para máxima precisão.
+* **30+ Sites Pré-configurados:**
+  * **Brasil:** Gupy, Vagas.com, Catho, InfoJobs, Trampos.
+  * **Globais/ATS:** Greenhouse, Lever, Workable, SmartRecruiters, BambooHR.
+  * **Big Tech & Remoto:** LinkedIn, Indeed, Glassdoor, RemoteOK, AngelList.
+* **Filtros Avançados:** Cargo, localização e data (24h até 1 ano).
+* **Integração com Blocklist:** Exclusão automática de empresas indesejadas das suas buscas.
 
----
+#### 📋 Kanban Board & Gestão
+* **Status em 5 Colunas:** Salvas, Aplicadas, Entrevista, Oferta e Rejeitadas.
+* **Interface Funcional:** Sistema de *Drag & Drop* para mover suas candidaturas entre as etapas.
+* **Anotações:** Edite notas personalizadas para cada vaga salva.
 
-## 👤 Autor
-
-**Thiago J.**
-
-- 💼 LinkedIn: [@ithiagojs](https://www.linkedin.com/in/ithiagojs/)
-- 🐙 GitHub: [@ithiagojs](https://github.com/ithiagojs)
-
----
-
-## 📝 Licença
-
-Este projeto foi criado com ❤️ para a turma de Dados.
+#### 📊 Analytics & Persistência
+* **Dashboard Real-time:** Gráficos (Recharts) dos 5 cargos mais buscados e estatísticas de performance.
+* **Persistência Total:** Todos os dados (tema, blocklist, histórico e Kanban) são salvos no **LocalStorage**, sobrevivendo ao refresh da página.
 
 ---
 
-## 🙏 Agradecimentos Meu Vilão Preferido
+### 🎯 Roadmap de Melhorias
+- [ ] **Backup:** Exportar/Importar dados completos via JSON.
+- [ ] **Filtros:** Busca e filtragem dentro do quadro Kanban.
+- [ ] **Insights:** Gráfico de timeline de buscas e heatmap de sites.
+- [ ] **Mobile:** Transformar em PWA (Progressive Web App).
 
+---
 
+### ⭐ Apoie este Projeto!
+Se esta ferramenta está ajudando na sua organização ou se você gostou da iniciativa, **deixe uma estrela (Star) no repositório!** Isso ajuda o projeto a ganhar visibilidade e alcançar mais profissionais.
+
+---
+
+### 👤 Autor
+
+**Thiago Jacques**
+
+<div align="left">
+  <a href="https://www.linkedin.com/in/ithiagojs" target="_blank">
+    <img src="https://img.shields.io/badge/-LinkedIn-%230077B5?style=for-the-badge&logo=linkedin&logoColor=white">
+  </a> 
+  <a href="https://github.com/ithiagojs">
+    <img src="https://img.shields.io/badge/-GitHub-181717?style=for-the-badge&logo=github&logoColor=white">
+  </a>
+</div>
+
+---
+*Este projeto foi criado com ❤️ para a turma de Dados.*
+<br>
+*Agradecimentos especiais: **Meu Vilão Preferido:*** Luyz. 
